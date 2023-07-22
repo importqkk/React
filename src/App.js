@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react';
 
 /*
     리액트: 사용자 정의 태그를 만드는 기술
@@ -13,9 +14,31 @@ import './App.css';
 /* 사용자 정의 태그 생성 */
 function Counter(props) {
     console.log(props);
+    /*
+        props: 외부에서 내부로 주입되는 상태
+        state: 내부적으로 사용하는 상태
+        -> props는 수정할 수 없음
+    */
+    /* 지역변수 (단, 적용 안됨 -> state로 승진시켜야 함) */
+    /* let count = props.initValue; */
+    /* import {useState} 하고 아래처럼 써줌 */
+    let countState = useState(props.initValue);
+    /*
+        state는 배열
+        - 첫번째 원소: 상태의 값 -> 읽을 때 씀
+        - 두번째 원소: 상태의 값을 바꿀 때 호출하는 함수 -> 바꿀때 씀
+    */
+    console.log(countState);
+    let count = countState[0];
+    let setCount = countState[1];
+    function up() {
+        /* props.initValue = props.initValue + 1; */
+        setCount(count + 1);
+        /* setCount(++count);로 해도 됨 */
+    }
     return <div>
                 <h1>{props.title}</h1>
-                <button>+</button> {props.initValue}
+                <button onClick={up}>+</button> {count}
             </div>
 }
 
@@ -32,7 +55,8 @@ function App() {
                 -> 숫자로 다루고 싶다면 따옴표가 아니라 {} 사용 (문자를 {} 사이에 넣으면 오류남)
         */
         <div>
-            <Counter title="불면증 카운터" initValue="10"></Counter>
+            {/* <Counter title="불면증 카운터" initValue="10"></Counter> */}
+            <Counter title="불면증 카운터" initValue={10}></Counter>
             <Counter title="손님 카운터" initValue={20}></Counter>
         </div>
     );
