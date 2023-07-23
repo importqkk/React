@@ -69,11 +69,13 @@ function Counter({ title, initValue }) {
     const stepHandler = (evt) => {
         setStep(Number(evt.target.value));
     };
+    // css주기
+    const style = { border: '5px solid black', padding: 10, backgroundColor: 'tomato' };
     // 배열을 태그로 만들 때는 map 함수를 사용한다.
     // 콜백함수는 2개의 파라미터를 갖는다.
     // 1. 순번에 해당하는 원소
     // 2. 해당 순번의 인덱스 (key)
-    return <div>
+    return <div style={style}>
                 <h1>{title}</h1>
                 <button onClick={up}>+</button>
                 <input type="number" value={step} onChange={stepHandler} />
@@ -116,8 +118,10 @@ function CounterUseEffect() {
             clearInterval(id);
         }
     }, []);
+    // css주기
+    const style = { border: '5px solid black', padding: 10 };
     return (
-        <div>
+        <div style={style}>
             <h1>useEffect Counter</h1> {count}
         </div>
     );
