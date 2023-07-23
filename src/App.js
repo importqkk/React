@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /*
     리액트: 사용자 정의 태그를 만드는 기술
@@ -91,6 +91,38 @@ function Counter({ title, initValue }) {
             </div>
 }
 
+function CounterUseEffect() {
+    const [count, setCount] = useState(0);
+    // sideEffect는 useEffect에 격리
+    // -> 예측 가능성이 떨어지기 때문에 별도로 격리해서 관리
+    // - 부작용을 쉽게 파악할 수 있음
+    // - 테스팅할 때 유용 (부작용만 따로 테스트)
+    // - 부작용의 실행 타이밍을 제어할 수 있다. 
+    // -> 두 번째 파라미터가 없으면 컴포넌트와 함께 실행된다. 
+    //    빈 배열이면 딱 한번 실행된다.
+    //    값이 있으면 그 값이 변경되었을 때 실행된다.
+    // - 함수가 정의될 때 함수 내에서 사용되는 변수는 함수 안에 봉인된다. -> 클로저
+    // - set 함수의 입력값은 값이거나 함수이다.
+    //   함수의 파라미터는 신선한 상태의 값이다.
+    //   -> return값이 새로운 상태가 된다.
+    // - useEffect의 리턴값은 정리할 때 사용한다.
+    //   -> unmount, 재실행 시 자동으로 호출된다.
+    useEffect(() => {
+        const id = setInterval(() => {
+            setCount(oldCount => oldCount+1);
+        }, 1000)
+        return () => {
+           //console.log('clean');
+            clearInterval(id);
+        }
+    }, []);
+    return (
+        <div>
+            <h1>useEffect Counter</h1> {count}
+        </div>
+    );
+}
+
 function App() {
     return (
         /*
@@ -100,13 +132,14 @@ function App() {
             사용자 정의 태그 안의 설정들(title, initValue 등)은 props다.
             - props: 입력값
             - 데이터 타입
-                -> 따옴표 안에 적으면 문자열로 취급
+                -> 따옴표 안에 적으2면 문자열로 취급
                 -> 숫자로 다루고 싶다면 따옴표가 아니라 {} 사용 (문자를 {} 사이에 넣으면 오류남)
         */
         <div>
             {/* <Counter title="불면증 카운터" initValue="10"></Counter> */}
             <Counter title="불면증 카운터" initValue={10}></Counter>
             {/* <Counter title="손님 카운터" initValue={20}></Counter> */}
+            <CounterUseEffect></CounterUseEffect>
         </div>
     );
 }
