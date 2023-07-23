@@ -58,7 +58,7 @@ function Counter({ title, initValue }) {
         // setCount(count + step);
         // 상태의 값이 배열, 객체와 같은 값의 컨테이너인 경우 상태를 복제한 후에 데이터를 추가, 수정, 삭제해야 한다.
         // 그래야 리액트는 이전의 상태와 이후의 상태가 변경되었다는 것을 알 수 있다.
-        // -> immutability
+        //      -> immutability
         const newCount = count + step;
         setCount(newCount);
         const newHistory = [...history];
@@ -69,6 +69,10 @@ function Counter({ title, initValue }) {
     const stepHandler = (evt) => {
         setStep(Number(evt.target.value));
     };
+    // 배열을 태그로 만들 때는 map 함수를 사용한다.
+    // 콜백함수는 2개의 파라미터를 갖는다.
+    // 1. 순번에 해당하는 원소
+    // 2. 해당 순번의 인덱스 (key)
     return <div>
                 <h1>{title}</h1>
                 <button onClick={up}>+</button>
@@ -76,6 +80,12 @@ function Counter({ title, initValue }) {
                 {count}
                 <ol>
                     {/* {[<li>5</li>, <li>5</li>]} */}
+                    {/*
+                        배열을 태그로 만들 때는 map 함수를 사용한다.
+                        콜백함수는 2개의 파라미터를 갖는다.
+                        1. 순번에 해당하는 원소
+                        2. 해당 순번의 인덱스 (key)
+                    */}
                     {history.map((e, idx) => <li key={idx}>{e}</li>)}
                 </ol>
             </div>
