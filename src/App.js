@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import { Container } from '@mui/system';
 
 /*
     리액트: 사용자 정의 태그를 만드는 기술
@@ -141,9 +142,11 @@ function App() {
         */
         <div>
             {/* <Counter title="불면증 카운터" initValue="10"></Counter> */}
-            <Counter title="불면증 카운터" initValue={10}></Counter>
-            {/* <Counter title="손님 카운터" initValue={20}></Counter> */}
-            <CounterUseEffect></CounterUseEffect>
+            <Container>
+                <Counter title="불면증 카운터" initValue={10}></Counter>
+                {/* <Counter title="손님 카운터" initValue={20}></Counter> */}
+                <CounterUseEffect></CounterUseEffect>
+            </Container>
         </div>
     );
 }
