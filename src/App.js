@@ -67,7 +67,7 @@ function Counter({ title, initValue }) {
                 {count}
                 <ol>
                     {/* {[<li>5</li>, <li>5</li>]} */}
-                    {history.map(e => <li>{e}</li>)}
+                    {history.map((e, idx) => <li key={idx}>{e}</li>)}
                 </ol>
             </div>
 }
