@@ -26,9 +26,9 @@ import { useState } from 'react';
 */
 
 /* 사용자 정의 태그 생성 */
-/*function Counter(props) {*/
+// function Counter(props) {
 function Counter({ title, initValue }) {
-    /*console.log(props);*/
+    // console.log(props);
     /*
         props: 외부에서 내부로 주입되는 상태
         state: 내부적으로 사용하는 상태
@@ -49,6 +49,9 @@ function Counter({ title, initValue }) {
 
     const [count, setCount] = useState(initValue);
     const [step, setStep] = useState(1);
+    // 자료형으로 배열 선언
+    const [history, setHistory] = useState([5, 5]);
+
     function up() {
         /* props.initValue = props.initValue + 1; */
         setCount(count + step);
@@ -62,6 +65,10 @@ function Counter({ title, initValue }) {
                 <button onClick={up}>+</button>
                 <input type="number" value={step} onChange={stepHandler} />
                 {count}
+                <ol>
+                    {/* {[<li>5</li>, <li>5</li>]} */}
+                    {history.map(e => <li>{e}</li>)}
+                </ol>
             </div>
 }
 
