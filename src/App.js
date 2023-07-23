@@ -34,10 +34,10 @@ function Counter({ title, initValue }) {
         state: 내부적으로 사용하는 상태
         -> props는 수정할 수 없음
     */
-    /* 지역변수 (단, 적용 안됨 -> state로 승진시켜야 함) */
-    /* let count = props.initValue; */
-    /* import {useState} 하고 아래처럼 써줌 */
-    /*let countState = useState(props.initValue);*/
+    // 지역변수 (단, 적용 안됨 -> state로 승진시켜야 함)
+    // let count = props.initValue;
+    // import {useState} 하고 아래처럼 써줌
+    // let countState = useState(props.initValue);
     /*
         state는 배열
         - 첫번째 원소: 상태의 값 -> 읽을 때 씀
@@ -53,9 +53,18 @@ function Counter({ title, initValue }) {
     const [history, setHistory] = useState([5, 5]);
 
     function up() {
-        /* props.initValue = props.initValue + 1; */
-        setCount(count + step);
-        /* setCount(++count);로 해도 됨 */
+        // props.initValue = props.initValue + 1;
+        // setCount(++count);로 해도 됨
+        // setCount(count + step);
+        // 상태의 값이 배열, 객체와 같은 값의 컨테이너인 경우 상태를 복제한 후에 데이터를 추가, 수정, 삭제해야 한다.
+        // 그래야 리액트는 이전의 상태와 이후의 상태가 변경되었다는 것을 알 수 있다.
+        // -> immutability
+        const newCount = count + step;
+        setCount(newCount);
+        const newHistory = [...history];
+        // debugger;
+        newHistory.push(newCount);
+        setHistory(newHistory);
     }
     const stepHandler = (evt) => {
         setStep(Number(evt.target.value));
