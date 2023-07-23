@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { Container } from '@mui/system';
+import { Grid } from '@mui/material';
 
 /*
     리액트: 사용자 정의 태그를 만드는 기술
@@ -142,10 +143,22 @@ function App() {
         */
         <div>
             {/* <Counter title="불면증 카운터" initValue="10"></Counter> */}
+            {/* <Counter title="손님 카운터" initValue={20}></Counter> */}
             <Container>
-                <Counter title="불면증 카운터" initValue={10}></Counter>
-                {/* <Counter title="손님 카운터" initValue={20}></Counter> */}
-                <CounterUseEffect></CounterUseEffect>
+                <Grid container maxWidth="xl">
+                    <Grid item xs={12} sm={6} md={3}>
+                        <Counter title="불면증 카운터" initValue={10}></Counter>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <CounterUseEffect></CounterUseEffect>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <CounterUseEffect></CounterUseEffect>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <CounterUseEffect></CounterUseEffect>
+                    </Grid>
+                </Grid>
             </Container>
         </div>
     );
