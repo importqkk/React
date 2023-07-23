@@ -48,14 +48,20 @@ function Counter({ title, initValue }) {
     let setCount = countState[1];*/
 
     const [count, setCount] = useState(initValue);
+    const [step, setStep] = useState(1);
     function up() {
         /* props.initValue = props.initValue + 1; */
-        setCount(count + 1);
+        setCount(count + step);
         /* setCount(++count);로 해도 됨 */
     }
     return <div>
                 <h1>{title}</h1>
-                <button onClick={up}>+</button> {count}
+                <button onClick={up}>+</button>
+                <input type="number" value={step} onChange={(evt)=>{
+                    //console.log('change', evt.target.value);
+                    setStep(Number(evt.target.value));
+                }} />
+                {count}
             </div>
 }
 
@@ -74,7 +80,7 @@ function App() {
         <div>
             {/* <Counter title="불면증 카운터" initValue="10"></Counter> */}
             <Counter title="불면증 카운터" initValue={10}></Counter>
-            <Counter title="손님 카운터" initValue={20}></Counter>
+            {/* <Counter title="손님 카운터" initValue={20}></Counter> */}
         </div>
     );
 }
