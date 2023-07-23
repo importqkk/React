@@ -54,13 +54,13 @@ function Counter({ title, initValue }) {
         setCount(count + step);
         /* setCount(++count);로 해도 됨 */
     }
+    const stepHandler = (evt) => {
+        setStep(Number(evt.target.value));
+    };
     return <div>
                 <h1>{title}</h1>
                 <button onClick={up}>+</button>
-                <input type="number" value={step} onChange={(evt)=>{
-                    //console.log('change', evt.target.value);
-                    setStep(Number(evt.target.value));
-                }} />
+                <input type="number" value={step} onChange={stepHandler} />
                 {count}
             </div>
 }
